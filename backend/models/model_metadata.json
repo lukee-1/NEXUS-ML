@@ -1,0 +1,58 @@
+{
+  "model_name": "fraud_detection_v1",
+  "model_type": "GradientBoostingClassifier",
+  "version": "1.0.0",
+  "created_at": "2026-05-20T10:00:00Z",
+  "features": [
+    "amount",
+    "hour_of_day",
+    "day_of_week",
+    "transaction_count_1h",
+    "transaction_count_24h",
+    "avg_amount_7d",
+    "unique_merchants_7d",
+    "card_present",
+    "merchant_risk_score",
+    "distance_from_home",
+    "time_since_last_tx",
+    "is_new_device",
+    "is_new_location",
+    "amount_to_avg_ratio",
+    "tx_velocity",
+    "high_risk_hour",
+    "amount_log",
+    "risk_composite"
+  ],
+  "feature_importance": {
+    "transaction_count_24h": 0.9102236732342658,
+    "distance_from_home": 0.04970327986717377,
+    "tx_velocity": 0.026202918667947467,
+    "time_since_last_tx": 0.0031953905995176536,
+    "transaction_count_1h": 0.0027590474677322632,
+    "risk_composite": 0.0020771278652730726,
+    "amount_log": 0.001138282548520192,
+    "unique_merchants_7d": 0.001008252033966706,
+    "merchant_risk_score": 0.0009555399599759108,
+    "avg_amount_7d": 0.0007798173698374412,
+    "amount_to_avg_ratio": 0.0007059429215041828,
+    "amount": 0.0007017040387642377,
+    "is_new_location": 0.00018543405570647592,
+    "is_new_device": 0.00017778222140803898,
+    "day_of_week": 7.719998084727062e-05,
+    "hour_of_day": 5.565136545608363e-05,
+    "high_risk_hour": 5.255823719413129e-05,
+    "card_present": 3.975649092788416e-07
+  },
+  "metrics": {
+    "auc_roc": 0.9999999999999999,
+    "precision": 0.99,
+    "recall": 0.98,
+    "f1_score": 0.985
+  },
+  "training_params": {
+    "n_estimators": 200,
+    "max_depth": 5,
+    "learning_rate": 0.1,
+    "subsample": 0.8
+  }
+}

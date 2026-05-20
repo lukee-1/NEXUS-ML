@@ -1,0 +1,232 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@layer base {
+  :root {
+    --background: 220 30% 5%;
+    --foreground: 220 10% 98%;
+    --card: 220 25% 8%;
+    --card-foreground: 220 10% 98%;
+    --popover: 220 25% 8%;
+    --popover-foreground: 220 10% 98%;
+    --primary: 160 84% 39%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 217 91% 60%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 220 20% 15%;
+    --muted-foreground: 220 10% 60%;
+    --accent: 220 20% 15%;
+    --accent-foreground: 220 10% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+    --border: 220 15% 15%;
+    --input: 220 15% 15%;
+    --ring: 160 84% 39%;
+    --radius: 0.5rem;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: #0A0E1A;
+    color: #F9FAFB;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #111827;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #374151;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #4B5563;
+  }
+}
+
+@layer components {
+  .font-mono {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  }
+
+  .card-glass {
+    background: #111827;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+  }
+
+  .card-glass:hover {
+    border-color: rgba(16, 185, 129, 0.2);
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, #10B981, #3B82F6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glow-green {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .status-active { background-color: #10B981; box-shadow: 0 0 8px rgba(16, 185, 129, 0.5); }
+  .status-warning { background-color: #F59E0B; box-shadow: 0 0 8px rgba(245, 158, 11, 0.5); }
+  .status-error { background-color: #EF4444; box-shadow: 0 0 8px rgba(239, 68, 68, 0.5); }
+  .status-idle { background-color: #6B7280; }
+
+  .metric-card {
+    @apply card-glass p-4;
+  }
+
+  .sidebar-item {
+    @apply flex items-center gap-3 px-3 py-2 rounded-md text-sm transition-colors cursor-pointer;
+    color: #9CA3AF;
+  }
+  .sidebar-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #F9FAFB;
+  }
+  .sidebar-item.active {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10B981;
+    border-left: 2px solid #10B981;
+  }
+
+  .nav-tab {
+    @apply px-4 py-2 text-sm font-medium transition-colors cursor-pointer border-b-2 border-transparent;
+    color: #9CA3AF;
+  }
+  .nav-tab:hover {
+    color: #F9FAFB;
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+  .nav-tab.active {
+    color: #10B981;
+    border-color: #10B981;
+  }
+
+  .log-info { color: #9CA3AF; }
+  .log-warn { color: #F59E0B; }
+  .log-error { color: #EF4444; }
+
+  .badge {
+    @apply inline-flex items-center px-2 py-0.5 rounded text-xs font-medium;
+  }
+  .badge-success { background: rgba(16, 185, 129, 0.15); color: #10B981; }
+  .badge-warning { background: rgba(245, 158, 11, 0.15); color: #F59E0B; }
+  .badge-error { background: rgba(239, 68, 68, 0.15); color: #EF4444; }
+  .badge-info { background: rgba(59, 130, 246, 0.15); color: #3B82F6; }
+  .badge-neutral { background: rgba(107, 114, 128, 0.15); color: #9CA3AF; }
+
+  .dag-node {
+    @apply flex items-center gap-2 px-3 py-2 rounded-md text-xs font-medium border transition-all;
+  }
+  .dag-node-success {
+    background: rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.3);
+    color: #10B981;
+  }
+  .dag-node-running {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: rgba(59, 130, 246, 0.5);
+    color: #3B82F6;
+    animation: pulse-border 2s infinite;
+  }
+  .dag-node-failed {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.3);
+    color: #EF4444;
+  }
+  .dag-node-queued {
+    background: rgba(107, 114, 128, 0.1);
+    border-color: rgba(107, 114, 128, 0.3);
+    color: #6B7280;
+  }
+
+  @keyframes pulse-border {
+    0%, 100% { border-color: rgba(59, 130, 246, 0.5); }
+    50% { border-color: rgba(59, 130, 246, 0.9); }
+  }
+
+  .pipeline-edge {
+    stroke: rgba(16, 185, 129, 0.4);
+    stroke-width: 2;
+    fill: none;
+  }
+  .pipeline-edge.active {
+    stroke: #10B981;
+    stroke-dasharray: 8 4;
+    animation: dash-flow 1s linear infinite;
+  }
+
+  @keyframes dash-flow {
+    to { stroke-dashoffset: -12; }
+  }
+}
+
+@layer utilities {
+  .bg-nexus {
+    background-color: #0A0E1A;
+  }
+  .bg-nexus-card {
+    background-color: #111827;
+  }
+  .bg-nexus-elevated {
+    background-color: #1F2937;
+  }
+  .text-nexus-primary {
+    color: #F9FAFB;
+  }
+  .text-nexus-secondary {
+    color: #9CA3AF;
+  }
+  .border-nexus {
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+}
+
+/* ReactFlow Overrides */
+.react-flow__node {
+  border-radius: 8px !important;
+}
+.react-flow__edge-path {
+  stroke-width: 2;
+}
+.react-flow__controls {
+  background: #1F2937 !important;
+  border-color: rgba(255,255,255,0.1) !important;
+}
+.react-flow__controls-button {
+  background: #1F2937 !important;
+  color: #9CA3AF !important;
+  border-color: rgba(255,255,255,0.1) !important;
+}
+.react-flow__minimap {
+  background: #111827 !important;
+}
+.react-flow__attribution {
+  display: none !important;
+}
